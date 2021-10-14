@@ -182,3 +182,24 @@ const addReservation = function(reservation) {
 }
 
 exports.addReservation = addReservation;
+
+//
+//  Gets upcoming reservations
+//
+const getUpcomingReservations = function(guest_id, limit = 10) {
+
+}
+
+//
+//  Updates an existing reservation with new information
+//
+const updateReservation = function(reservationId, newReservationData) {
+
+}
+
+//
+//  Deletes an existing reservation
+//
+const deleteReservation = function(reservationId) {
+
+}
