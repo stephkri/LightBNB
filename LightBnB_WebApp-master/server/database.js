@@ -128,16 +128,16 @@ const getAllProperties = (options, limit = 10) => {
       queryString += `AND cost_per_night <= $${queryParams.length} `;
     }
 
+    // 4 modified
+    queryString += `
+    GROUP BY properties.id `;
     if (options.minimum_rating) {
       queryParams.push(`${options.minimum_rating}`);
-      queryString += `AND rating >= $${queryParams.length} `;
+      queryString += `HAVING avg(property_reviews.rating) >= $${queryParams.length} `;
     }
 
-    // 4
     queryParams.push(limit);
-    queryString += `
-    GROUP BY properties.id
-    ORDER BY cost_per_night
+    queryString += `ORDER BY cost_per_night
     LIMIT $${queryParams.length};
     `;
   
@@ -146,16 +146,6 @@ const getAllProperties = (options, limit = 10) => {
   
     // 6
     return pool.query(queryString, queryParams).then((res) => res.rows);
-  /*
-  return pool
-    .query(`SELECT * FROM properties LIMIT $1`, [limit])
-    .then((result) => {
-      return result.rows;
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-    */
 };
 exports.getAllProperties = getAllProperties;
 
