@@ -9,6 +9,18 @@ module.exports = function(router, database) {
     }); 
   });
 
+  router.post('/properties', (req, res) => {
+    const userId = req.session.userId;
+    database.addProperty({...req.body, owner_id: userId})
+      .then(property => {
+        res.send(property);
+      })
+      .catch(e => {
+        console.error(e);
+        res.send(e)
+      });
+  });
+
   router.post('/reservations', (req, res) => {
     const userId = req.session.userId;
     if (userId) {
@@ -37,16 +49,18 @@ module.exports = function(router, database) {
     });
   });
 
-  router.post('/properties', (req, res) => {
+  router.get('/reservations/upcoming', (req, res) => {
     const userId = req.session.userId;
-    database.addProperty({...req.body, owner_id: userId})
-      .then(property => {
-        res.send(property);
-      })
-      .catch(e => {
-        console.error(e);
-        res.send(e)
-      });
+    if (!userId) {
+      res.error("💩");
+      return;      
+    }
+    database.getUpcomingReservations(userId)
+    .then(reservations => res.send({ reservations }))
+    .catch(e => {
+      console.error(e);
+      res.send(e);
+    })
   });
 
   return router;
