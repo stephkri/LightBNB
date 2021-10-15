@@ -147,7 +147,7 @@ const getAllProperties = (options, limit = 10) => {
     `;
   
     // 5
-    console.log(queryString, queryParams);
+    //console.log(queryString, queryParams);
   
     // 6
     return pool.query(queryString, queryParams).then((res) => res.rows);
@@ -166,7 +166,6 @@ const addProperty = function(property) {
    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *`,
   [property.title, property.description, property.owner_id, property.cover_photo_url, property.thumbnail_photo_url, property.cost_per_night, property.parking_spaces, property.number_of_bathrooms, property.number_of_bedrooms, property.province, property.city, property.country, property.street, property.post_code])
   .then((result) => {
-    console.log(result.rows);
     return result.rows;
   })
   .catch((err) => {
@@ -227,8 +226,11 @@ const updateReservation = function(reservationData) {
     queryString += ` end_date = $${queryParams.length}`;
   }
   queryParams.push(reservationData.reservation_id);
-  queryString += ` WHERE id = $${queryParams.length} RETURNING *`;
-  return pool.query(queryString, queryParams).then(res => res.rows[0])
+  queryString += ` WHERE id = $${queryParams.length} RETURNING *;`;
+  return pool.query(queryString, queryParams).then(res => {
+    console.log('res:', res.rows[0]);
+    return res.rows[0];
+  })
   .catch(e => console.log(e));
 }
 

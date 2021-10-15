@@ -78,7 +78,8 @@ module.exports = function(router, database) {
     const reservationId = req.params.reservationId;
     database.updateReservation({...req.body, reservation_id: reservationId})
     .then(reservation => {
-      res.send(reservation)
+      console.log(reservation);
+      res.send(reservation);
     })
   })
 
