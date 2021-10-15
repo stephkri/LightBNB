@@ -212,9 +212,27 @@ exports.getUpcomingReservations = getUpcomingReservations;
 //
 //  Updates an existing reservation with new information
 //
-const updateReservation = function(reservationId, newReservationData) {
-
+const updateReservation = function(reservationData) {
+  let queryString = `UPDATE reservations SET`;
+  const queryParams = [];
+  if (reservationData.start_date) {
+    queryParams.push(reservationData.start_date);
+    queryString += ` start_date = $${queryParams.length}`;
+    if (reservationData.end_date) {
+      queryString += `,`;
+    }
+  }
+  if (reservationData.end_date) {
+    queryParams.push(reservationData.end_date);
+    queryString += ` end_date = $${queryParams.length}`;
+  }
+  queryParams.push(reservationData.reservation_id);
+  queryString += ` WHERE id = $${queryParams.length} RETURNING *`;
+  return pool.query(queryString, queryParams).then(res => res.rows[0])
+  .catch(e => console.log(e));
 }
+
+exports.updateReservation = updateReservation;
 
 //
 //  Deletes an existing reservation
