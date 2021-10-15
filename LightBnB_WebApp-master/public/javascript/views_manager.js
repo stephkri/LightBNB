@@ -12,6 +12,8 @@ $(() => {
     $signUpForm.detach();
     $newReservationForm.detach();
 
+    let dataTag = "";
+
     switch (item) {
       case 'listings':
         $propertyListings.appendTo($main);
@@ -29,9 +31,31 @@ $(() => {
         $signUpForm.appendTo($main);
         break;
       case 'newReservation':
-        const dataTag = `<h4>${data}</h4>`;
+        dataTag = `<h4>${data}</h4>`;
         $newReservationForm.appendTo($main);
         $(dataTag).appendTo("#datatag");
+        break;
+      case 'updateReservation':
+        // since we're getting more information here, we can include this in an extended data tag:
+        dataTag = `
+          <span id="datatag-reservation-id">${data.id}</span>
+          <span id="datatag-start-date">${data.start_date}</span>
+          <span id="datatag-end-date">${data.end_date}</span>
+          <span id="datatag-property-id">${data.property_id}</span>
+        `
+        const reservationDetails = `
+          <div id="reservation-details">
+            <h3>Reservation Details</h3>
+            <h4>Start date: ${moment(data.start_date).format("MMMM DD, YYYY")}</h4>
+            <h4>End date: ${moment(data.end_date).format("MMMM DD, YYYY")}</h4>
+          </div>
+        `
+        // if there's an error message we want to display that as well:
+        const errorMessage = data.error_message ? `<h4>${data.error_message}</h4>` : ``;
+        $(reservationDetails).appendTo($main);
+        $updateReservationForm.appendTo($main);
+        $(dataTag).appendTo("#datatag");
+        $(errorMessage).appendTo('#error-message');
         break;
       case 'error': {
         const $error = $(`<p>${arguments[1]}</p>`);

@@ -222,3 +222,13 @@ const updateReservation = function(reservationId, newReservationData) {
 const deleteReservation = function(reservationId) {
 
 }
+
+// Gets an individual reservations
+const getIndividualReservation = function(reservationId) {
+  return pool
+  .query(`SELECT * FROM reservations WHERE reservations.id = $1`, [reservationId])
+  .then(res => res.rows[0])
+  .catch(e => console.log(e.message));
+}
+
+exports.getIndividualReservation = getIndividualReservation;
