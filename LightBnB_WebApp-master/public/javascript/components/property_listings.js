@@ -30,6 +30,16 @@ $(() => {
       const listing = propertyListing.createListing(property, isReservation);
       addListing(listing);
     }
+    if (isReservation) {
+      $('.update-button').on('click', function() {
+        const idData = $(this).attr('id').substring(16);
+        console.log(`update ${idData}`);          
+      })
+      $('.delete-button').on('click', function() {
+        const idData = $(this).attr('id').substring(16);
+        console.log(`delete ${idData}`);          
+      })
+    } 
   }
   window.propertyListings.addProperties = addProperties;
 

@@ -89,7 +89,7 @@ const getFulfilledReservations = function(guest_id, limit = 10) {
   ORDER BY reservations.start_date
   LIMIT $2;`;
   const params = [guest_id, limit];
-  return client.query(queryString, params)
+  return pool.query(queryString, params)
     .then(res => res.rows);
 }
 exports.getFulfilledReservations = getFulfilledReservations;
@@ -203,7 +203,7 @@ const getUpcomingReservations = function(guest_id, limit = 10) {
   ORDER BY reservations.start_date
   LIMIT $2;`;
   const params = [guest_id, limit];
-  return client.query(queryString, params)
+  return pool.query(queryString, params)
     .then(res => res.rows);
 }
 
