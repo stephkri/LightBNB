@@ -76,6 +76,7 @@ function getIndividualReservation(reservationId) {
 }
 
 const updateReservation = function(data) {
+  console.log('Res ID in network.js:', data.reservation_id)
   return $.ajax({
     method: "POST",
     url: `/api/reservations/${data.reservation_id}`,

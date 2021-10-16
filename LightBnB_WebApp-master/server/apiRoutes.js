@@ -75,6 +75,7 @@ module.exports = function(router, database) {
 
   // update an existing reservation
   router.post('/reservations/:reservationId', (req, res) => {
+    console.log('Req params:', req.params);
     const reservationId = req.params.reservationId;
     database.updateReservation({...req.body, reservation_id: reservationId})
     .then(reservation => {

@@ -34,6 +34,7 @@ $(() => {
       $('.update-button').on('click', function() {
         const idData = $(this).attr('id').substring(16);
         getIndividualReservation(idData).then(data => {
+          console.log('Data in listener:', data);
           views_manager.show("updateReservation", data);       
         });
       })

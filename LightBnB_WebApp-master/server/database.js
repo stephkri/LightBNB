@@ -212,6 +212,7 @@ exports.getUpcomingReservations = getUpcomingReservations;
 //  Updates an existing reservation with new information
 //
 const updateReservation = function(reservationData) {
+  console.log(reservationData);
   let queryString = `UPDATE reservations SET`;
   const queryParams = [];
   if (reservationData.start_date) {
@@ -227,6 +228,7 @@ const updateReservation = function(reservationData) {
   }
   queryParams.push(reservationData.reservation_id);
   queryString += ` WHERE id = $${queryParams.length} RETURNING *;`;
+  console.log(queryString, queryParams);
   return pool.query(queryString, queryParams).then(res => {
     console.log('res:', res.rows[0]);
     return res.rows[0];

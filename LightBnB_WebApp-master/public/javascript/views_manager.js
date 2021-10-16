@@ -5,6 +5,8 @@ $(() => {
   window.views_manager = {};
 
   window.views_manager.show = function(item, data = '') {
+    console.log('item:', item);
+    console.log('data:', data);
     $newPropertyForm.detach();
     $propertyListings.detach();
     $searchPropertyForm.detach();

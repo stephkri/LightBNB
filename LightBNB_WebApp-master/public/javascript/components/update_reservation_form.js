@@ -163,6 +163,7 @@ $(() => {
     let errorMessage = "";
     let startDate;
     let endDate;
+    let reservationId;
     let originalStartDate = new Date($("#datatag-start-date").text());
     let originalEndDate = new Date($("#datatag-end-date").text())
     event.preventDefault();
@@ -212,7 +213,8 @@ $(() => {
     }
   
     if ((startDate || endDate) && !errorMessage) {
-      const reservationId = $(this).find("#datatag-reservation-id").text();
+      reservationId = $(this).find("#datatag-reservation-id").text();
+      console.log('Res ID in update form:', reservationId);
       const dataObj = { start_date: startDate, end_date: endDate, reservation_id: reservationId };
       updateReservation(dataObj)
       .then(data => {
