@@ -107,7 +107,7 @@ const getAllProperties = (options, limit = 10) => {
     const queryParams = [];
     // 2
     let queryString = `
-    SELECT properties.*, avg(property_reviews.rating) as average_rating
+    SELECT properties.*, avg(property_reviews.rating) as average_rating, count(property_reviews.rating) as review_count
     FROM properties
     JOIN property_reviews ON properties.id = property_id
     `;
