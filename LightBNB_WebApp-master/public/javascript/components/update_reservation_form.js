@@ -245,6 +245,7 @@ $(() => {
         property_id: $(this).find('#datatag-property-id').text(),
         error_message: errorMessage
       }
+      console.log('Id in else:', dataObj.id);
       views_manager.show('updateReservation', dataObj);
     }
   });

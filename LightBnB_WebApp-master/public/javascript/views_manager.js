@@ -6,7 +6,7 @@ $(() => {
 
   window.views_manager.show = function(item, data = '') {
     console.log('item:', item);
-    console.log('data:', data);
+    console.log('data ID:', data.id);
     $newPropertyForm.detach();
     $propertyListings.detach();
     $searchPropertyForm.detach();
@@ -36,10 +36,12 @@ $(() => {
         break;
       case 'newReservation':
         dataTag = `<h4>${data}</h4>`;
+        console.log('Data tag for new reservation:', dataTag);
         $newReservationForm.appendTo($main);
         $(dataTag).appendTo("#datatag");
         break;
       case 'updateReservation':
+        console.log('Line 43 foo bar',data.id);
         // since we're getting more information here, we can include this in an extended data tag:
         dataTag = `
           <span id="datatag-reservation-id">${data.id}</span>
@@ -47,6 +49,7 @@ $(() => {
           <span id="datatag-end-date">${data.end_date}</span>
           <span id="datatag-property-id">${data.property_id}</span>
         `
+        console.log('Data tag for update reservation:', dataTag);
         const reservationDetails = `
           <div id="reservation-details">
             <h3>Reservation Details</h3>
@@ -56,8 +59,11 @@ $(() => {
         `
         // if there's an error message we want to display that as well:
         const errorMessage = data.error_message ? `<h4>${data.error_message}</h4>` : ``;
+        console.log('Data tag line 62', $('#datatag').html);
         $(reservationDetails).appendTo($main);
         $updateReservationForm.appendTo($main);
+        //$('#datatag').html('');
+        $('#datatag').empty();
         $(dataTag).appendTo("#datatag");
         $(errorMessage).appendTo('#error-message');
         break;
