@@ -242,17 +242,16 @@ exports.updateReservation = updateReservation;
 //
 //  Deletes an existing reservation
 //
-/*
 const deleteReservation = function(reservationId) {
+  console.log('Delete res ID in SQL function:', reservationId);
   const queryParams = [reservationId];
   const queryString = `DELETE FROM reservations WHERE id = $1`;
   return pool.query(queryString, queryParams)
     .then(() => console.log("Successfully deleted!"))
-    .catch(() => console.error(err));
+    .catch((err) => console.error(err));
 }
 
 exports.deleteReservation = deleteReservation;
-*/
 
 // Gets an individual reservations
 const getIndividualReservation = function(reservationId) {

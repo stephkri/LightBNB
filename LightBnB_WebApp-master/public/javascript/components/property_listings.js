@@ -43,11 +43,10 @@ $(() => {
       $('.delete-button').on('click', function() {
         const idData = $(this).attr('id').substring(16);
         console.log(`delete ${idData}`);
-        /*
         deleteReservation(idData).then(() => {
           views_manager.show("listings");
+          console.log('We got here');
         });
-        */
       })
     }
   }
