@@ -241,6 +241,7 @@ exports.updateReservation = updateReservation;
 //
 //  Deletes an existing reservation
 //
+/*
 const deleteReservation = function(reservationId) {
   const queryParams = [reservationId];
   const queryString = `DELETE FROM reservations WHERE id = $1`;
@@ -250,6 +251,7 @@ const deleteReservation = function(reservationId) {
 }
 
 exports.deleteReservation = deleteReservation;
+*/
 
 // Gets an individual reservations
 const getIndividualReservation = function(reservationId) {

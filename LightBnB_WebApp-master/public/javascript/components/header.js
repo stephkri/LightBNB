@@ -46,7 +46,9 @@ $(() => {
   });
 
   $("header").on("click", '.my_reservations_button', function() {
-    propertyListings.clearListings();
+    if (propertyListings) {
+      propertyListings.clearListings();
+    }
     getFulfilledReservations()
       .then(function(json) {
         propertyListings.addProperties(json.reservations, { upcoming: false });
