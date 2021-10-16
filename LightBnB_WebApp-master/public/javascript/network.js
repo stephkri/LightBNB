@@ -90,3 +90,10 @@ const deleteReservation = function(id) {
     url: `/api/reservations/${id}`
   })
 }
+
+const getReviewsByProperty = function(propertyId) {
+  const url = `api/reviews/${propertyId}`;
+  return $.ajax({
+    url,
+  });
+}
