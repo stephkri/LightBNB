@@ -43,7 +43,9 @@ $(() => {
       $('.delete-button').on('click', function() {
         const idData = $(this).attr('id').substring(16);
         console.log(`delete ${idData}`);
-        deleteReservation(idData).then(() => {
+        deleteReservation(idData).then((res) => {
+          console.log(res);
+          $(this).closest('article').remove();
           views_manager.show("listings");
           console.log('We got here');
         });

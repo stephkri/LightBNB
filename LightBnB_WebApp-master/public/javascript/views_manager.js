@@ -38,6 +38,7 @@ $(() => {
         dataTag = `<h4>${data}</h4>`;
         console.log('Data tag for new reservation:', dataTag);
         $newReservationForm.appendTo($main);
+        $('#datatag').empty();
         $(dataTag).appendTo("#datatag");
         break;
       case 'updateReservation':
