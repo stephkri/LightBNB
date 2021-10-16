@@ -48,8 +48,8 @@ $(() => {
         const reservationDetails = `
           <div id="reservation-details">
             <h3>Reservation Details</h3>
-            <h4>Start date: ${moment(data.start_date).format("MMMM DD, YYYY")}</h4>
-            <h4>End date: ${moment(data.end_date).format("MMMM DD, YYYY")}</h4>
+            <h4>Start date: ${moment.utc(data.start_date).format("MMMM DD, YYYY")}</h4>
+            <h4>End date: ${moment.utc(data.end_date).format("MMMM DD, YYYY")}</h4>
           </div>
         `
         // if there's an error message we want to display that as well:
